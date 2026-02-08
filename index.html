@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Telegram Mini App</title>
     <!-- Подключаем скрипт Telegram -->
+    <<!-- ПРАВИЛЬНЫЙ АДРЕС -->
     <script src="https://telegram.org"></script>
     <style>
         body { font-family: sans-serif; text-align: center; padding: 20px; 
@@ -17,7 +18,9 @@
 <body>
     <h1>Привет, <span id="username">пользователь</span>!</h1>
     <button onclick="tg.close()">Закрыть окно</button>
+    <button>
 
+    </button>
     <script>
         let tg = window.Telegram.WebApp; // Получаем объект Telegram
         tg.expand(); // Разворачиваем окно на весь экран
