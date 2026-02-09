@@ -26,7 +26,7 @@
         Большой кейс (100 XTR)
     </button>
     
-    <button class="case-button" onclick="tg.close()">Закрыть меню</button>
+    <button class="case-button" onclick="close()">Закрыть меню</button>
 
     <script>
         // Проверяем, что мы внутри приложения Telegram
@@ -46,6 +46,11 @@
                 // Можно сразу закрыть окно после отправки
                 tg.close();
             }
+            function close()
+            {
+                tg.close();
+            }
+        
 
         } else {
             console.error("Not in Telegram Web App environment.");
