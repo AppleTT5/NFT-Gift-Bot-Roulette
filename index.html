@@ -14,7 +14,7 @@
     align-items: center;
     
     /* ОТСТУПЫ: Сверху 0, Справа 15px, Снизу 0, Слева 0 (для картинки) */
-    padding: 6px 15px 6px 4px; 
+    padding: 15px 15px 15px 15px; 
     gap: 20px; /* Расстояние между картинкой и текстом */
     
     background-color: rgb(39, 41, 53);
@@ -60,12 +60,15 @@
         <span>Большой кейс (100 Звёзд)</span>
     </button>
     
-    <button class="case-button" onclick="close()">Закрыть меню</button>
+    <button class="case-button" onclick="closeApp()" style="justify-content: center;">
+    <span>Закрыть меню</span>
+    </button>
 
     <script>
+        let tg = window.Telegram.WebApp
         // Проверяем, что мы внутри приложения Telegram
         if (window.Telegram && window.Telegram.WebApp) { 
-            let tg = window.Telegram.WebApp;
+            tg.ready();
             tg.expand();
             //let user_id = document.getElementById("user_id").value;
             // Отображаем имя пользователя
@@ -78,7 +81,7 @@
                 // Отправляем название кейса как строку данных боту
                 tg.sendData(caseName); 
                 // Можно сразу закрыть окно после отправки
-                tg.close();
+                tg.closeApp();
             }
             function close()
             {
@@ -93,5 +96,3 @@
     </script>
 </body>
 </html>
-
-
