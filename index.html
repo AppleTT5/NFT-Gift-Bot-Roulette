@@ -52,11 +52,11 @@
     
     <!-- Кнопки для покупки кейсов -->
     <button class="case-button" onclick="buyCase('Маленький кейс')">
-        <img src="small_case.jpeg" alt="Иконка" style="width:100px;height:100px;">
+        <img src="small_case.jpeg" alt="📦" style="width:100px;height:100px;">
         <span>Маленький кейс (25 Звёзд)</span>
     </button>
     <button class="case-button" onclick="buyCase('Большой кейс')">
-        <img src="big_case.jpg" alt="Иконка" style="width:100px;height:100px;">
+        <img src="big_case.jpg" alt="📦" style="width:100px;height:100px;">
         <span>Большой кейс (100 Звёзд)</span>
     </button>
     
@@ -73,8 +73,9 @@
             //let user_id = document.getElementById("user_id").value;
             // Отображаем имя пользователя
             if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-                document.getElementById("username").innerText = tg.initDataUnsafe.user.first_name;
-            }
+            document.getElementById("username").innerText = tg.initDataUnsafe.user.first_name;
+            } else {
+            document.getElementById("username").innerText = "пользователь";}
 
             // Функция отправки данных в бота при нажатии
             function buyCase(caseName) {
@@ -85,7 +86,7 @@
             }
             function close()
             {
-                tg.close();
+                tg.closeApp();
             }
         
 
