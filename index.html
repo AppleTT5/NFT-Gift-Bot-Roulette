@@ -12,30 +12,35 @@
         .case-button {
     display: flex;
     align-items: center;
-    padding: 0;                /* Полностью убираем внутренние отступы */
-    padding-right: 15px;       /* Оставляем отступ только справа для текста */
-    gap: 15px;                 /* Промежуток между картинкой и текстом */
+    
+    /* ОТСТУПЫ: Сверху 0, Справа 15px, Снизу 0, Слева 0 (для картинки) */
+    padding: 0 15px 0 0; 
+    gap: 20px; /* Расстояние между картинкой и текстом */
     
     background-color: rgb(39, 41, 53);
     color: var(--tg-theme-button-text-color);
     border: none;
-    border-radius: 12px;
+    border-radius: 17px;
+    margin-bottom: 10px;
     width: 100%;
-    margin-bottom: 10px;       /* Отступ между кнопками */
     
     font-size: 18px;
     font-family: sans-serif;
     cursor: pointer;
-    overflow: hidden;          /* Обрезает края картинки под border-radius */
-        }
+    overflow: hidden;
+}
         .case-button:hover { opacity: 0.8; }
         .image{
               width: 20%;
               object-fit: cover;
         }
         .case-button img {
-    display: block;        /* Убирает лишние зазоры снизу у картинки */
-    border-radius: 8px;}
+    /* Фиксируем размер картинки, чтобы она не растягивала кнопку */
+    width: 80px; 
+    height: 80px;
+    display: block;
+    object-fit: cover;
+}
     .case-button span {
     padding-right: 15px;    /* Чтобы текст не прилипал к правому краю */
     text-align: left;
