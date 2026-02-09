@@ -12,11 +12,19 @@
         .case-button { padding: 15px 30px; font-size: 18px; cursor: pointer;
                         
                        background-color: rgb(39, 41, 53); color: var(--tg-theme-button-text-color); 
-                       border: none; border-radius: 8px; margin: 10px; width: 80%; }
+                       border: none; border-radius: 8px; margin: 10px; width: 80%; 
+                       display: flex;         /* Включает гибкую верстку */
+                       align-items: center;   /* Выравнивает картинку и текст по центру (вертикально) */
+                       gap: 15px;             /* Создает отступ между картинкой и текстом */
+                       padding: 10px 20px;    /* Внутренние отступы кнопки */
+                     cursor: pointer;}
         .case-button:hover { opacity: 0.8; }
         .image{
               width: 20%;
         }
+        .case-button img {
+    display: block;        /* Убирает лишние зазоры снизу у картинки */
+    border-radius: 8px;}
     </style>
 </head>
 <body>
@@ -25,11 +33,11 @@
     <!-- Кнопки для покупки кейсов -->
     <button class="case-button" onclick="buyCase('Маленький кейс')">
         <img src="small_case.jpeg" alt="Иконка" style="width:100px;height:100px;">
-        Маленький кейс (25 XTR)
+        <span>Маленький кейс (25 Звёзд)</span>
     </button>
     <button class="case-button" onclick="buyCase('Большой кейс')">
         <img src="big_case.jpg" alt="Иконка" style="width:100px;height:100px;">
-        Большой кейс (100 XTR)
+        <span>Большой кейс (100 Звёзд)</span>
     </button>
     
     <button class="case-button" onclick="close()">Закрыть меню</button>
