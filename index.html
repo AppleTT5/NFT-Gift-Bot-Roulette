@@ -33,7 +33,7 @@
         if (window.Telegram && window.Telegram.WebApp) { 
             let tg = window.Telegram.WebApp;
             tg.expand();
-            
+            //let user_id = document.getElementById("user_id").value;
             // Отображаем имя пользователя
             if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
                 document.getElementById("username").innerText = tg.initDataUnsafe.user.first_name;
@@ -44,12 +44,13 @@
                 // Отправляем название кейса как строку данных боту
                 tg.sendData(caseName); 
                 // Можно сразу закрыть окно после отправки
-                //tg.close();
+                tg.close();
             }
 
         } else {
             console.error("Not in Telegram Web App environment.");
         }
+            
     </script>
 </body>
 </html>
