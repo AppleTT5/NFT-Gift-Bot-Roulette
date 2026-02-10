@@ -81,7 +81,7 @@ if (user) {
 // 2. Универсальная функция покупки
 function buyCase(caseName) {
     const tg = window.Telegram.WebApp;
-    tg.switchInlineQuery(caseName, ['users', 'groups', 'channels']); 
+    tg.switchInlineQuery(caseName, []); 
     setTimeout(() => {
         tg.close();
     }, 500);
@@ -93,3 +93,4 @@ function closeApp() {
     </script>
 </body>
 </html>
+
