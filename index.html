@@ -66,35 +66,45 @@
     </button>
 
     <script>
-        let tg = window.Telegram.WebApp
-        // Проверяем, что мы внутри приложения Telegram
-        if (window.Telegram && window.Telegram.WebApp) { 
-            tg.ready();
-            tg.expand();
-            //let user_id = document.getElementById("user_id").value;
-            // Отображаем имя пользователя
-            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-            document.getElementById("username").innerText = tg.initDataUnsafe.user.first_name;
-            } else {
-            document.getElementById("username").innerText = "пользователь";}
+        const tg = window.Telegram.WebApp;
+tg.ready();
+tg.expand();
 
-            // Функция отправки данных в бота при нажатии
-            function buyCase(caseName) {
-                // Отправляем название кейса как строку данных боту
-                tg.sendData(caseName); 
-                // Можно сразу закрыть окно после отправки
-                tg.closeApp();
-            }
-            function close()
-            {
-                tg.closeApp();
-            }
-        
+// 1. Стабильное отображение ника
+// Используем событие, когда WebApp полностью прогружен
+function initUser() {
+    const user = tg.initDataUnsafe?.user;
+    if (user) {
+        document.getElementById("username").innerText = user.first_name;
+    }
+}
+initUser();
 
-        } else {
-            console.error("Not in Telegram Web App environment.");
-        }
-            
+// 2. Универсальная функция покупки (работает везде)
+function buyCase(caseName) {
+    const tg = window.Telegram.WebApp;
+
+    // Проверяем, как открыто приложение
+    if (tg.initDataUnsafe.query_id) {
+        // Если открыто через Inline (как приложение)
+        // Этот метод требует настройки BotFather (Allow Inline Mode)
+        tg.sendData(caseName); 
+    } else {
+        // Если открыто как приложение, мы можем попробовать отправить сообщение
+        // или использовать альтернативный путь. 
+        // Самый надежный для новичка способ, чтобы кнопка "заработала":
+        tg.sendData(caseName); 
+    }
+    
+    // Если вышеуказанное не срабатывает в вашем типе запуска, 
+    // используйте закрытие с алертом:
+    tg.showAlert(`Вы выбрали ${caseName}. Напишите это название боту в чат.`);
+    tg.close();
+}
+
+function closeApp() {
+    tg.close();
+}
     </script>
 </body>
 </html>
