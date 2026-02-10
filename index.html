@@ -80,20 +80,8 @@ if (user) {
 
 // 2. Универсальная функция покупки
 function buyCase(caseName) {
-    // Проверяем, доступен ли метод sendData (только для KeyboardButton)
-    if (tg.initDataUnsafe.query_id || !tg.initDataUnsafe.hash) {
-        // Если это Inline-режим или приложение по ссылке:
-        // Используем showAlert, чтобы пользователь понимал, что произошло
-        tg.showAlert(`Вы выбрали: ${caseName}\n\nНапишите это название боту в чат для оплаты.`);
-        
-        // В идеале здесь должен быть fetch на ваш сервер, но так как его нет:
-        // Можно попробовать закрыть приложение, данные НЕ уйдут через sendData
-    } else {
-        // Если открыто через нижнюю кнопку (Keyboard Button)
-        tg.sendData(caseName); 
-    }
-    
-    // Закрываем приложение через секунду
+    const tg = window.Telegram.WebApp;
+    tg.switchInlineQuery(caseName, ['users', 'groups', 'channels']); 
     setTimeout(() => {
         tg.close();
     }, 500);
