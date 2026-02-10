@@ -66,40 +66,37 @@
     </button>
 
     <script>
-        const tg = window.Telegram.WebApp;
+const tg = window.Telegram.WebApp;
+
+// Инициализация при загрузке
 tg.ready();
 tg.expand();
 
-// 1. Стабильное отображение ника
-// Используем событие, когда WebApp полностью прогружен
-function initUser() {
-    const user = tg.initDataUnsafe?.user;
-    if (user) {
-        document.getElementById("username").innerText = user.first_name;
-    }
+// 1. Стабильное отображение имени
+const user = tg.initDataUnsafe?.user;
+if (user) {
+    document.getElementById("username").innerText = user.first_name;
 }
-initUser();
 
-// 2. Универсальная функция покупки (работает везде)
+// 2. Универсальная функция покупки
 function buyCase(caseName) {
-    const tg = window.Telegram.WebApp;
-
-    // Проверяем, как открыто приложение
-    if (tg.initDataUnsafe.query_id) {
-        // Если открыто через Inline (как приложение)
-        // Этот метод требует настройки BotFather (Allow Inline Mode)
-        tg.sendData(caseName); 
+    // Проверяем, доступен ли метод sendData (только для KeyboardButton)
+    if (tg.initDataUnsafe.query_id || !tg.initDataUnsafe.hash) {
+        // Если это Inline-режим или приложение по ссылке:
+        // Используем showAlert, чтобы пользователь понимал, что произошло
+        tg.showAlert(`Вы выбрали: ${caseName}\n\nНапишите это название боту в чат для оплаты.`);
+        
+        // В идеале здесь должен быть fetch на ваш сервер, но так как его нет:
+        // Можно попробовать закрыть приложение, данные НЕ уйдут через sendData
     } else {
-        // Если открыто как приложение, мы можем попробовать отправить сообщение
-        // или использовать альтернативный путь. 
-        // Самый надежный для новичка способ, чтобы кнопка "заработала":
+        // Если открыто через нижнюю кнопку (Keyboard Button)
         tg.sendData(caseName); 
     }
     
-    // Если вышеуказанное не срабатывает в вашем типе запуска, 
-    // используйте закрытие с алертом:
-    tg.showAlert(`Вы выбрали ${caseName}. Напишите это название боту в чат.`);
-    tg.close();
+    // Закрываем приложение через секунду
+    setTimeout(() => {
+        tg.close();
+    }, 500);
 }
 
 function closeApp() {
